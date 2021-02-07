@@ -5,8 +5,8 @@ import random
 import time
 import os
 yzombi = random.randint(-250,250) # y-Zufallposition
-xp = -350
-yp = 100
+
+syp = []
 
 # Bild Bearbeitung
 mywidth=100 # gewunschte Bereite (100)
@@ -29,11 +29,11 @@ img=Image.open('soldier1.gif') # Bild importieren
 img = img.resize((mywidth,myheight),PIL.Image.ANTIALIAS) # Gr0ße ändern
 img.save('soldier1.gif') # speichern
 
-mywidth=20 # gewunschte Bereite (150)
-myheight=10 # gewunschte Höhe (160)
+mywidth=60 # gewunschte Bereite (150)
+myheight=60 # gewunschte Höhe (160)
 img=Image.open('bullet1.gif') # Bild importieren 
 img = img.resize((mywidth,myheight),PIL.Image.ANTIALIAS) # Gr0ße ändern
-img.save('billet1.gif') # speichern
+img.save('bullet1.gif') # speichern
 
 
 
@@ -54,7 +54,7 @@ soldier = turtle.Turtle()
 soldier.hideturtle()
 soldier.penup()
 soldier.shape('soldier1.gif')
-soldier.setposition(xp,yp)
+soldier.setposition(-350,100)
 soldier.showturtle()
 
 # Figur Bullet im Spiel
@@ -62,50 +62,70 @@ bullet = turtle.Turtle()
 bullet.hideturtle()
 bullet.penup()
 bullet.shape('bullet1.gif')
-bullet.setposition((xp+40),(yp+40))
-bullet.showturtle()
+bullet.setposition((-310),(140))
+
+zomb1 = turtle.Turtle()  # neue Figur bringen wir und zomb nennen wir sie
 
 # Figur Zombie im Spiel
 def addzombi1():
-    zomb = turtle.Turtle()  # neue Figur bringen wir und zomb nennen wir sie
-    zomb.shape('resize.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )
-    zomb.hideturtle()
-    zomb.penup() # damit die Figur keine Streife hinterlest
-    zomb.speed(0) # maximume Geschwindigkeit
-    zomb.setposition(350,(random.randint(-250,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
-    zomb.speed(random.randint(0,1)) # zufällige Geschwindigkeit
-    zomb.showturtle()
-    zomb.backward(800)
+
+    zomb1.hideturtle()
+    zomb1.shape('resize.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )
+    zomb1.penup() # damit die Figur keine Streife hinterlest
+    zomb1.speed(0) # maximume Geschwindigkeit
+    zomb1.setposition(350,(random.randint(-250,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
+    zomb1.speed(random.randint(0,1)) # zufällige Geschwindigkeit
+    zomb1.showturtle()
+    zomb1.backward(800)
     
-        
+zomb = turtle.Turtle()  # eine Figur bringen wir und zomb nennen wir sie 
+    
     
 def addzombi2():
-    zomb = turtle.Turtle()  # eine Figur bringen wir und zomb nennen wir sie
+    
     zomb.hideturtle()
-    zomb.shape('zombie2.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )
+    zomb.shape('zombie2.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )  
     zomb.penup() # damit die Figur keine Streife hinterlest
     zomb.speed(0) # maximume Geschwindigkeit
     zomb.setposition(350,(random.randint(-250,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
     zomb.speed(random.randint(0,1)) # zufällige Geschwindigkeit
     zomb.showturtle()
     zomb.backward(800)
-    
+   
 def oben():
     soldier.setheading(90)
-    soldier.forward(30)
+    soldier.forward(40)
+    soldier.ycor()
+    syp.append(soldier.ycor())
+    
 def unten():
     soldier.setheading(-90)
-    soldier.forward(30)
+    soldier.forward(40)
+    syp.append(soldier.ycor())
+    
 def schiessen():
-    bullet.forward(750)
+      
+    bullet.goto(-310,(syp[-1]+40))  
+    bullet.showturtle()
+    bullet.forward(650) 
+    bullet.hideturtle()
+    
 
 # Tastatur   
 turtle.listen()
 turtle.onkey(oben, "w")
 turtle.onkey(unten, "s")
 turtle.onkey(schiessen, "d")
+while 1 :
+    addzombi1()
+    addzombi2()
+    
 
- 
+    
+    
+
+turtle.mainloop()
+
 
 
    

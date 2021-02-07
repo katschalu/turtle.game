@@ -3,7 +3,7 @@ import PIL # Bibliothek pillow importieren
 from PIL import Image # Funktion Image von Bibliothek pillow importieren
 import random
 import time
-import os
+
 
 # Y-Zufallposition
 yzombi = random.randint(-250,250) 
@@ -72,34 +72,35 @@ def addzombi1():
     zomb1.shape('resize.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )
     zomb1.penup() # damit die Figur keine Streife hinterlest
     zomb1.speed(100) # maximume Geschwindigkeit
-    zomb1.setposition(350,(random.randint(-250,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
+    zomb1.setposition(350,(random.randint(-230,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
     zomb1.speed(random.randint(0,1)) # zufällige Geschwindigkeit
     zomb1.showturtle()
     zomb1.backward(800)
     
 zomb = turtle.Turtle()  # eine Figur bringen wir und zomb nennen wir sie 
-    
-    
+        
 def addzombi2():
     zomb.hideturtle()
     zomb.shape('zombie2.gif') # das geäenderte Bild nehmen wir als Figur zomb ( Zombie )  
     zomb.penup() # damit die Figur keine Streife hinterlest
     zomb.speed(100) # minimume Geschwindigkeit
-    zomb.setposition(350,(random.randint(-250,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
+    zomb.setposition(350,(random.randint(-230,250))) # positionieren auf der rechten seite mit zufällige y-Position zwischen -250 und 250
     zomb.speed(random.randint(0,1)) # zufällige Geschwindigkeit
     zomb.showturtle()
     zomb.backward(800)
    
 def oben():
-    soldier.setheading(90)
-    soldier.forward(40)
-    soldier.ycor()
-    syp.append(soldier.ycor())
+    if soldier.ycor() < 220:
+        soldier.setheading(90)
+        soldier.forward(40)
+        soldier.ycor()
+        syp.append(soldier.ycor())
     
 def unten():
-    soldier.setheading(-90)
-    soldier.forward(40)
-    syp.append(soldier.ycor())
+    if soldier.ycor() >= -200:
+        soldier.setheading(-90)
+        soldier.forward(40)
+        syp.append(soldier.ycor())
     
 def schiessen():     
     bullet.goto(-310,(syp[-1]+40))  
@@ -112,8 +113,7 @@ def schiessen():
         elif bullet.distance(zomb1) < 45 :
             zomb1.hideturtle()
             zomb1.speed(100)
-            bullet.hideturtle()
-          
+            bullet.hideturtle()   
     bullet.hideturtle()
 
 # Tastatur   

@@ -2,7 +2,7 @@ import turtle # Bibliothek turtle imortieren
 import PIL # Bibliothek pillow importieren 
 from PIL import Image # Funktion Image von Bibliothek pillow importieren
 import random
-import time
+
 
 
 # Y-Zufallposition
